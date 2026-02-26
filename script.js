@@ -1,5 +1,22 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Theme toggle (dark/light)
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme');
+const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+root.setAttribute('data-theme', initialTheme);
+if (themeToggle) {
+  themeToggle.textContent = initialTheme === 'light' ? '☀️ Light' : '🌙 Dark';
+  themeToggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    themeToggle.textContent = next === 'light' ? '☀️ Light' : '🌙 Dark';
+  });
+}
+
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
     if (e.isIntersecting) e.target.classList.add('show');
