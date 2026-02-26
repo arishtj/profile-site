@@ -4,8 +4,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const root = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme');
-const systemPrefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+const initialTheme = savedTheme || 'dark';
 root.setAttribute('data-theme', initialTheme);
 if (themeToggle) {
   themeToggle.textContent = initialTheme === 'light' ? '☀️ Light' : '🌙 Dark';
